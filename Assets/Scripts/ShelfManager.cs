@@ -14,11 +14,10 @@ public class ShelfManager : MonoBehaviour
 
     public void InitializeShelf(List<BookServerData> shelfData)
     {
-        Debug.Log("shelf initialized");
         for (int index = 0; index < shelfData.Count; index++)
         {
             Vector3 bookPosition = GetBookPosition(index);
-            var book = Instantiate(_bookPrefab) as Book;
+            var book = Instantiate(_bookPrefab, _bookParent) as Book;
             book.transform. position = bookPosition;
             book.InitializeBook(shelfData[index]);
         }
@@ -26,7 +25,9 @@ public class ShelfManager : MonoBehaviour
 
     private Vector3 GetBookPosition(int bookIndex)
     {
-        float offset = _bookOffset * Mathf.Pow(-1, bookIndex);
+        int direction = bookIndex % 2 == 0 ? 1 : -1;
+        float offset = (bookIndex +1 )/2 * direction * _bookOffset;
+        // _bookOffset * bookIndex/2 * Mathf.Pow(-1, bookIndex);
         Vector3 bookPosition = new Vector3 (_bookParent.position.x + offset, _bookParent.position.y, _bookParent.position.z);
         return bookPosition;
     }

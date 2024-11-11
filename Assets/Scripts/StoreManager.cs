@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 
 
 public class StoreManager : MonoBehaviour
@@ -27,11 +27,12 @@ public class StoreManager : MonoBehaviour
     private async void TryGetShelfData()
     {
         List<BookServerData> booksData = await ServerManager.Instance.FetchDataAsync("products");
-        if(booksData == null)
+        if(booksData.Count == 0 || _useMockData)
         {
             InitializeShelf(_mockData);
             Debug.Log("Server data could not be fetched using Mock Data");
-        } else
+        } 
+        else
         {
             InitializeShelf(booksData);
             Debug.Log("Server data was fetched successfuly");
@@ -48,13 +49,17 @@ public class StoreManager : MonoBehaviour
     private List<BookServerData> GetRandomData(List<BookServerData> booksData)
     {
         List<BookServerData> randomBooksData = new List<BookServerData>();
-        int randomBooksAmount = Random.Range(1,4);
-        for (int i = 0; i < randomBooksAmount; i++)
-        {
-            int randomBook = Random.Range(0,booksData.Count);
-            randomBooksData.Add(booksData[randomBook]);
-        }
+        int randomBooksAmount = 3; //Random.Range(1,4);
 
+        List<int> availableIndices = Enumerable.Range(0, booksData.Count).ToList();
+        availableIndices = availableIndices.OrderBy(x => Random.value).ToList();
+
+        for (int i = 0; i < randomBooksAmount && i < availableIndices.Count; i++)
+        {
+            int randomIndex = availableIndices[i];
+            randomBooksData.Add(booksData[randomIndex]);
+        }   
+       
         return randomBooksData;
     }
 }

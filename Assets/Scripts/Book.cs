@@ -1,8 +1,17 @@
 using UnityEngine;
-
+using TMPro;
 
 public class Book : MonoBehaviour
 {
+    [SerializeField]
+    private TextMeshProUGUI _nameText;
+     [SerializeField]
+    private TextMeshProUGUI _TitleText;
+    [SerializeField]
+    private TextMeshProUGUI _descriptionText;
+    [SerializeField]
+    private TextMeshProUGUI _priceText;
+
     private string _name;
     private string _description;
     private float _price;
@@ -21,13 +30,19 @@ public class Book : MonoBehaviour
    {
         BookServerData bookData = new BookServerData
         {
-
+            Name = _name,
+            Description = _description,
+            Price = _price
         };
+
         return bookData;
    }
 
    private void InitializeBookVisuals()
    {
-
+        _nameText.text = _name;
+        _TitleText.text = _name;
+        _descriptionText.text = _description;
+        _priceText.text = _price.ToString() + "$"; 
    }
 }

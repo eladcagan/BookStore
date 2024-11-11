@@ -4,8 +4,14 @@ using DG.Tweening;
 
 public class Book : MonoBehaviour
 {
-    [SerializeField]
-    private Transform _transform;
+     [SerializeField]
+    private GameObject _editPanel;
+     [SerializeField]
+    private GameObject _editButton;
+
+
+
+
     [SerializeField]
     private Vector3 _bookShowPosition;
     [SerializeField]
@@ -60,22 +66,22 @@ public class Book : MonoBehaviour
    public void OnBookSelected()
    {
         transform.DOLocalRotate(_bookShowRotation, _bookShowDuration);
-        transform.DOLocalMove(_bookShowPosition, _bookShowDuration);
-        // .OnComplete(()=> 
-        // {
-
-        // });
+        transform.DOLocalMove(_bookShowPosition, _bookShowDuration).OnComplete(()=> 
+        {
+            _editButton.SetActive(true);
+        });
         
    }
 
    public void OnBookUnselected()
    {
+        _editButton.SetActive(false);
         transform.DOLocalRotate(Vector3.zero, _bookShowDuration);
         transform.DOLocalMove(_initialPosition, _bookShowDuration);
-        // .OnComplete(()=> 
-        // {
+   }
 
-        // });
-        
+    public void OnEditButtonClicked()
+   {
+        _editPanel.SetActive(true);
    }
 }

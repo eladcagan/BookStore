@@ -325,7 +325,7 @@ Transform:
   m_GameObject: {fileID: 434004942}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -13.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -625,21 +625,21 @@ MonoBehaviour:
   _useMockData: 0
   _shelf: {fileID: 155914045}
   _mockData:
-  - Name: Book1
-    Description: Book1
-    Price: 1
-  - Name: Book2
-    Description: Book2
-    Price: 2
-  - Name: Book3
-    Description: Book3
-    Price: 3
-  - Name: Book4
-    Description: Book4
-    Price: 4
-  - Name: Book5
-    Description: Book5
-    Price: 5
+  - name: 
+    description: 
+    price: 0
+  - name: 
+    description: 
+    price: 0
+  - name: 
+    description: 
+    price: 0
+  - name: 
+    description: 
+    price: 0
+  - name: 
+    description: 
+    price: 0
 --- !u!1 &1719278448
 GameObject:
   m_ObjectHideFlags: 0

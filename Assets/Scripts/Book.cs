@@ -38,9 +38,9 @@ public class Book : MonoBehaviour
 
      public void InitializeBook(BookServerData bookData)
      {
-          _name = bookData.Name;
-          _description = bookData.Name;
-          _price = bookData.Price;
+          _name = bookData.name;
+          _description = bookData.description;
+          _price = bookData.price;
           _newPrice = _price;
           _initialPosition = transform.localPosition;
           InitializeBookVisuals();
@@ -50,9 +50,9 @@ public class Book : MonoBehaviour
      {
           BookServerData bookData = new BookServerData
           {
-               Name = _name,
-               Description = _description,
-               Price = _price
+               name = _name,
+               description = _description,
+               price = _price
           };
 
           return bookData;

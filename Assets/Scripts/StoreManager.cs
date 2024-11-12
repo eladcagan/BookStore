@@ -27,6 +27,7 @@ public class StoreManager : MonoBehaviour
     private async void TryGetShelfData()
     {
         List<BookServerData> booksData = await ServerManager.Instance.FetchDataAsync("products");
+
         if(booksData.Count == 0 || _useMockData)
         {
             InitializeShelf(_mockData);
@@ -65,16 +66,3 @@ public class StoreManager : MonoBehaviour
 }
 
 
-[System.Serializable]
-public class BookServerData
-{
-    public string Name;
-    public string Description;
-    public float Price;
-}
-
-[System.Serializable]
-public class ShelfServerData
-{
-    public List<BookServerData> BooksData;
-}

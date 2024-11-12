@@ -622,7 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1518bd8813286c04c9e4d63385dea1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useMockData: 1
+  _useMockData: 0
   _shelf: {fileID: 155914045}
   _mockData:
   - Name: Book1

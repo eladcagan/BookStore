@@ -39,7 +39,7 @@ public class ServerManager : MonoBehaviour
             {
                 string jsonResponse = request.downloadHandler.text;
                 ShelfServerData dataList = JsonUtility.FromJson<ShelfServerData>(jsonResponse);
-                return dataList.BooksData;
+                return dataList.products;
             }
             else
             {
@@ -78,4 +78,18 @@ public class ServerManager : MonoBehaviour
             }
         }
     }
+}
+
+[System.Serializable]
+public class BookServerData
+{
+    public string name;
+    public string description;
+    public float price;
+}
+
+[System.Serializable]
+public class ShelfServerData
+{
+    public List<BookServerData> products;
 }

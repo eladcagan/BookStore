@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 public class ServerManager : MonoBehaviour
 {
-    private readonly string baseUrl = "https://homework.mocart.io/api";
+    private readonly string baseUrl = "https://homework.mocart.io/api"; //Can be changed to get a dynamic url
 
     public static ServerManager Instance { get; private set; }
 
@@ -22,7 +22,6 @@ public class ServerManager : MonoBehaviour
         }
     }
 
-    // Fetch a list of PlayerData from the server (GET)
     public async Task<List<BookServerData>> FetchDataAsync(string endpoint)
     {
         string url = $"{baseUrl}/{endpoint}";
@@ -39,6 +38,7 @@ public class ServerManager : MonoBehaviour
             {
                 string jsonResponse = request.downloadHandler.text;
                 ShelfServerData dataList = JsonUtility.FromJson<ShelfServerData>(jsonResponse);
+                Debug.Log("books amount: " + dataList.products.Count);
                 return dataList.products;
             }
             else
@@ -49,7 +49,7 @@ public class ServerManager : MonoBehaviour
         }
     }
     
-    // Update data on the server (POST with JSON)
+    // Can be used to Update data on the server (Out of scope)
     public async Task<string> UpdateDataAsync<T>(string endpoint, T data)
     {
         string url = $"{baseUrl}/{endpoint}";
@@ -80,6 +80,8 @@ public class ServerManager : MonoBehaviour
     }
 }
 
+// In more complicated cases this would have been classes on there on
+#region Server Data Classes
 [System.Serializable]
 public class BookServerData
 {
@@ -93,3 +95,4 @@ public class ShelfServerData
 {
     public List<BookServerData> products;
 }
+#endregion

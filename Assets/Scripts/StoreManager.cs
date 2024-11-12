@@ -43,15 +43,33 @@ public class StoreManager : MonoBehaviour
 
     private void InitializeShelf(List<BookServerData> booksData)
     {
-        List<BookServerData> randomBooksData = GetRandomData(booksData);
-        _shelf.InitializeShelf(randomBooksData);
+         List<BookServerData> books = new List<BookServerData>();
+        if(_useMockData) 
+        {
+            books = GetRandomData(booksData);
+        } 
+        else
+        {
+            if(booksData.Count > 0)
+            {
+                books = booksData;
+            }
+            else // Insure that something is displayed in case fetched data is unseccusseful (In real scenerio it can be real data saved offline)
+            {
+                books = GetRandomData(booksData);
+            }
+            
+        }
+
+        _shelf.InitializeShelf(books);
     }
 
+    // used to randomize mock data for testing  
     private List<BookServerData> GetRandomData(List<BookServerData> booksData)
     {
         List<BookServerData> randomBooksData = new List<BookServerData>();
         int randomBooksAmount = Random.Range(1,4);
-
+        Debug.Log("Random Books Amount: " + randomBooksAmount);
         List<int> availableIndices = Enumerable.Range(0, booksData.Count).ToList();
         availableIndices = availableIndices.OrderBy(x => Random.value).ToList();
 

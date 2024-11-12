@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Book : MonoBehaviour
 {
+     #region Edit Panel
      [SerializeField]
      private GameObject _editPanel;
      [SerializeField]
@@ -13,6 +14,7 @@ public class Book : MonoBehaviour
      private TMP_InputField _inputNameField;
      [SerializeField]
      private TMP_InputField _inputPriceField;
+     #endregion
 
      [SerializeField]
      private Vector3 _bookShowPosition;
@@ -46,6 +48,7 @@ public class Book : MonoBehaviour
           InitializeBookVisuals();
      }
 
+     //Can be used to return the updated book data to server (out of scope)
      public BookServerData GetBookData()
      {
           BookServerData bookData = new BookServerData
@@ -57,6 +60,8 @@ public class Book : MonoBehaviour
 
           return bookData;
      }
+
+     #region Buttons
 
      public void OnBookSelected()
      {
@@ -122,6 +127,8 @@ public class Book : MonoBehaviour
           InitializeBookVisuals();
      }
 
+     #endregion
+
      private void InitializeBookVisuals()
      {
           _nameText.text = _name;
@@ -130,6 +137,7 @@ public class Book : MonoBehaviour
           _priceText.text = "$" + _price.ToString();
      }
 
+     // Used to ensure valid value for price
      private void ValidateInput(string input)
      {
           // Filter out any non-numeric characters
@@ -155,7 +163,6 @@ public class Book : MonoBehaviour
           if (float.TryParse(numericInput, out float result))
           {
                _newPrice = result;
-               Debug.Log("Parsed float value: " + _price);
           }
      }
 }

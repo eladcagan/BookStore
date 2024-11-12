@@ -23,11 +23,11 @@ public class ShelfManager : MonoBehaviour
         }
     }
 
+    // Position the books from the center outwards
     private Vector3 GetBookPosition(int bookIndex)
     {
         int direction = bookIndex % 2 == 0 ? 1 : -1;
         float offset = (bookIndex +1 )/2 * direction * _bookOffset;
-        // _bookOffset * bookIndex/2 * Mathf.Pow(-1, bookIndex);
         Vector3 bookPosition = new Vector3 (_bookParent.position.x + offset, _bookParent.position.y, _bookParent.position.z);
         return bookPosition;
     }

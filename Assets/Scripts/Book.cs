@@ -8,8 +8,8 @@ public class Book : MonoBehaviour
     private GameObject _editPanel;
      [SerializeField]
     private GameObject _editButton;
-
-
+     [SerializeField]
+    private TextMeshProUGUI _inputField;
 
 
     [SerializeField]
@@ -83,5 +83,15 @@ public class Book : MonoBehaviour
     public void OnEditButtonClicked()
    {
         _editPanel.SetActive(true);
+        _editButton.SetActive(false);
+   }
+
+   public void OnEditApplied()
+   {
+       _name = _inputField.text;
+       _editButton.SetActive(true);
+       _editPanel.SetActive(false);
+       InitializeBookVisuals();
+
    }
 }

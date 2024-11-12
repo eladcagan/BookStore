@@ -49,7 +49,7 @@ public class StoreManager : MonoBehaviour
     private List<BookServerData> GetRandomData(List<BookServerData> booksData)
     {
         List<BookServerData> randomBooksData = new List<BookServerData>();
-        int randomBooksAmount = 3; //Random.Range(1,4);
+        int randomBooksAmount = Random.Range(1,4);
 
         List<int> availableIndices = Enumerable.Range(0, booksData.Count).ToList();
         availableIndices = availableIndices.OrderBy(x => Random.value).ToList();

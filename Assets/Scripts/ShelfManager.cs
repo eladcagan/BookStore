@@ -10,6 +10,8 @@ public class ShelfManager : MonoBehaviour
     private Transform _bookParent;
     [SerializeField]
     private float _bookOffset = 0.5f;
+    [SerializeField]
+    private List<Color> _bookColors;
 
 
     public void InitializeShelf(List<BookServerData> shelfData)
@@ -19,7 +21,7 @@ public class ShelfManager : MonoBehaviour
             Vector3 bookPosition = GetBookPosition(index);
             var book = Instantiate(_bookPrefab, _bookParent) as Book;
             book.transform. position = bookPosition;
-            book.InitializeBook(shelfData[index]);
+            book.InitializeBook(shelfData[index], _bookColors[index]);
         }
     }
 

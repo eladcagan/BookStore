@@ -30,7 +30,8 @@ public class Book : MonoBehaviour
      private TextMeshProUGUI _descriptionText;
      [SerializeField]
      private TextMeshProUGUI _priceText;
-
+     [SerializeField]
+     private Renderer _bookRenderer;
      private Tween _movementTween;
      private Tween _rotationTween;
 
@@ -40,13 +41,14 @@ public class Book : MonoBehaviour
      private float _newPrice;
      private Vector3 _initialPosition;
 
-     public void InitializeBook(BookServerData bookData)
+     public void InitializeBook(BookServerData bookData, Color bookColor)
      {
           _name = bookData.name;
           _description = bookData.description;
           _price = bookData.price;
           _newPrice = _price;
           _initialPosition = transform.localPosition;
+          _bookRenderer.material.color = bookColor;
           InitializeBookVisuals();
      }
 
@@ -139,6 +141,7 @@ public class Book : MonoBehaviour
           _TitleText.text = _name;
           _descriptionText.text = _description;
           _priceText.text = "$" + _price.ToString();
+
      }
 
      // Used to ensure valid value for price

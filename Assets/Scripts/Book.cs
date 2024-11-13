@@ -31,12 +31,14 @@ public class Book : MonoBehaviour
      [SerializeField]
      private TextMeshProUGUI _priceText;
 
+     private Tween _movementTween;
+     private Tween _rotationTween;
+
      private string _name;
      private string _description;
      private float _price;
      private float _newPrice;
      private Vector3 _initialPosition;
-     private Vector3 _initialRotation;
 
      public void InitializeBook(BookServerData bookData)
      {
@@ -65,8 +67,9 @@ public class Book : MonoBehaviour
 
      public void OnBookSelected()
      {
-          transform.DOLocalRotate(_bookShowRotation, _bookShowDuration);
-          transform.DOLocalMove(_bookShowPosition, _bookShowDuration).OnComplete(() =>
+          KillTweens();
+          _rotationTween = transform.DOLocalRotate(_bookShowRotation, _bookShowDuration);
+          _movementTween = transform.DOLocalMove(_bookShowPosition, _bookShowDuration).OnComplete(() =>
           {
                _editButton.SetActive(true);
           });
@@ -75,9 +78,10 @@ public class Book : MonoBehaviour
 
      public void OnBookUnselected()
      {
+          KillTweens();
           _editButton.SetActive(false);
-          transform.DOLocalRotate(Vector3.zero, _bookShowDuration);
-          transform.DOLocalMove(_initialPosition, _bookShowDuration);
+          _rotationTween =transform.DOLocalRotate(Vector3.zero, _bookShowDuration);
+          _movementTween = transform.DOLocalMove(_initialPosition, _bookShowDuration);
      }
 
      public void OnEditButtonClicked()
@@ -164,5 +168,11 @@ public class Book : MonoBehaviour
           {
                _newPrice = result;
           }
+     }
+
+     private void KillTweens()
+     {
+          _rotationTween.Kill();
+          _movementTween.Kill();
      }
 }

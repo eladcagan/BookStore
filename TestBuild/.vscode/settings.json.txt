@@ -1,0 +1,9 @@
+{
+  liveServer.settings.port 7777,
+  liveServer.settings.https {
+    enable false,
+    cert Usersmakaka.orgDocumentsbitbucketsensor-camerabuild_webgllocalhost.pem,
+    key Usersmakaka.orgDocumentsbitbucketsensor-camerabuild_webgllocalhost.key,
+    passphrase 123456
+  }
+}
